@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vector Core | Premium Vector Graphics & Branding Agency</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="loading-active">
+    <audio id="typewriter-sound" preload="auto">
+        <source src="hhdndsncnf" type="audio/mpeg">
+    </audio>
+
+    <!-- Preloader with Typewriter -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="vectorcore.png" alt="Vector Core" class="preloader-logo">
+            <div class="typewriter-text" id="typewriter-text-main"></div>
+        </div>
+    </div> 
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Sidebar Drawer Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="vectorcore.png" alt="Vector Core" class="sidebar-logo">
+            <button class="close-btn" id="close-btn">×</button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="#home" onclick="toggleSidebar()">Home</a></li>
+            <li><a href="#about" onclick="toggleSidebar()">About</a></li>
+            <li><a href="#services" onclick="toggleSidebar()">Services</a></li>
+            <li><a href="#process" onclick="toggleSidebar()">Process</a></li>
+            <li><a href="#work" onclick="toggleSidebar()">Our Work</a></li>
+            <li><a href="#team" onclick="toggleSidebar()">Team</a></li>
+            <li><a href="#contact" onclick="toggleSidebar()">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Navbar with Interactive Dropdown Previews -->
+    <nav class="nav old-nav" id="main-nav">
+        <div class="container nav-container">
+            <a href="#home" class="logo-link">
+                <img src="vectorcore.png" alt="Vector Core Logo" class="logo">
+            </a>
+
+            <ul class="nav-links">
+                <!-- Home - No preview -->
+                <li class="nav-item">
+                    <a href="#home">Home</a>
+                </li>
+
+                <!-- About - No preview -->
+                <li class="nav-item">
+                    <a href="#about">About</a>
+                </li>
+
+                <!-- Services - With mini cards preview -->
+                <li class="nav-item">
+                    <a href="#services">Services</a>
+                    <div class="nav-preview preview-services">
+                        <a href="#services" class="preview-service-card">
+                            <i class="fas fa-pen-fancy service-icon"></i>
+                            <h3>Vector Logo Design</h3>
+                        </a>
+                        <a href="#services" class="preview-service-card">
+                            <i class="fas fa-layer-group service-icon"></i>
+                            <h3>Brand Identity</h3>
+                        </a>
+                        <a href="#services" class="preview-service-card">
+                            <i class="fas fa-images service-icon"></i>
+                            <h3>Graphic Design</h3>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Process - With steps preview -->
+                <li class="nav-item">
+                    <a href="#process">Process</a>
+                    <div class="nav-preview">
+                        <div class="preview-process-step">
+                            <strong>01.</strong> Discovery & Strategy
+                        </div>
+                        <div class="preview-process-step">
+                            <strong>02.</strong> Concept & Design
+                        </div>
+                        <div class="preview-process-step">
+                            <strong>03.</strong> Refinement
+                        </div>
+                        <div class="preview-process-step">
+                            <strong>04.</strong> Delivery & Support
+                        </div>
+                    </div>
+                </li>
+
+                <!-- Our Work - With mini project preview -->
+                <li class="nav-item">
+                    <a href="#work">Our Work</a>
+                    <div class="nav-preview preview-work">
+                        <a href="#work" class="preview-work-card">
+                            <div class="preview-work-thumb" style="background-image: url('files/ui1-full.jpg');"></div>
+                            <span>UI/UX Design</span>
+                        </a>
+                        <a href="#work" class="preview-work-card">
+                            <div class="preview-work-thumb" style="background-image: url('files/brand1-full.jpg');"></div>
+                            <span>Brand Identity</span>
+                        </a>
+                        <a href="#work" class="preview-work-card">
+                            <div class="preview-work-thumb" style="background-image: url('files/motion1-full.jpg');"></div>
+                            <span>Motion Graphics</span>
+                        </a>
+                    </div>
+                </li>
+
+                <!-- Team - No preview -->
+                <li class="nav-item">
+                    <a href="#team">Team</a>
+                </li>
+
+                <!-- Contact - No preview -->
+                <li class="nav-item">
+                    <a href="#contact">Contact</a>
+                </li>
+            </ul>
+
+            <button class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="main-wrapper">
+    <section id="home" class="hero section">
+        <div class="particles-container" id="particles"></div>
+        <div class="floating-assets"></div>
+        <div class="container hero-content">
+            <img src="vectorcore.png" alt="Vector Core" class="hero-logo breathing reveal-item">
+            <h1 class="reveal-item">Premium Vector Graphics & Branding Agency</h1>
+            <p class="large reveal-item"> We craft precision vector logos, complete brand identities, stunning graphics, intuitive UI/UX, custom web development, and dynamic motion graphics for ambitious brands worldwide.</p>
+            <div class="hero-buttons reveal-item">
+                <a href="#contact" class="btn primary">Start a Project</a>
+                <a href="#work" class="btn secondary">View Our Work</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section bg-light">
+        <div class="container">
+            <h2>About Vector Core</h2>
+            <p class="large">We are a boutique creative agency passionate about delivering precision design solutions. Our team combines artistic excellence with technical expertise to create impactful visual identities and digital experiences that drive success.</p>
+            <p class="sub-about">We partner with startups, enterprises, and creators across Nigeria, Africa, and the world.</p>
+        </div>
+        <div class="floating-assets"></div>
+    </section>
+
+    <section id="services" class="section">
+        <div class="container">
+            <h2>Our Services</h2>
+            <p class="subtitle">Full-spectrum creative expertise</p>
+            
+            <div class="services-carousel">
+                <div class="carousel-track">
+                    <div class="service-card">
+                        <i class="fas fa-pen-fancy service-icon"></i>
+                        <h3>Vector Logo Design</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-layer-group service-icon"></i>
+                        <h3>Brand Identity</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-images service-icon"></i>
+                        <h3>Graphic Design</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-desktop service-icon"></i>
+                        <h3>UI/UX Design</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-code service-icon"></i>
+                        <h3>Web Development</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-video service-icon"></i>
+                        <h3>Motion Graphics</h3>
+                    </div>
+                    <!-- Duplicates for infinite loop -->
+                    <div class="service-card">
+                        <i class="fas fa-pen-fancy service-icon"></i>
+                        <h3>Vector Logo Design</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-layer-group service-icon"></i>
+                        <h3>Brand Identity</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-images service-icon"></i>
+                        <h3>Graphic Design</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-desktop service-icon"></i>
+                        <h3>UI/UX Design</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-code service-icon"></i>
+                        <h3>Web Development</h3>
+                    </div>
+                    <div class="service-card">
+                        <i class="fas fa-video service-icon"></i>
+                        <h3>Motion Graphics</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="section bg-light">
+        <div class="container">
+            <h2>Our Process</h2>
+            <p class="subtitle">A proven, collaborative approach to exceptional results</p>
+            <div class="process-steps">
+                <div class="process-step-reveal">
+                    <h3>01. Discovery & Strategy</h3>
+                    <p>We dive deep into your brand, goals, audience, and market to create a solid foundation and strategic direction for the project.</p>
+                </div>
+                <div class="process-step-reveal">
+                    <h3>02. Concept & Design</h3>
+                    <p>We explore creative directions, develop initial concepts, wireframes, and prototypes to bring your vision to life.</p>
+                </div>
+                <div class="process-step-reveal">
+                    <h3>03. Refinement</h3>
+                    <p>We iterate based on your feedback, polishing every detail until the design is perfect and ready for delivery.</p>
+                </div>
+                <div class="process-step-reveal">
+                    <h3>04. Delivery & Support</h3>
+                    <p>We deliver final assets in all required formats and provide ongoing support to ensure long-term success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="section">
+        <div class="container">
+            <h2>Our Work</h2>
+            <p class="subtitle">Selected projects across our expertise</p>
+
+            <div class="work-category-block">
+                <h3 class="category-title">Web Development</h3>
+                <div class="swiper portfolio-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="web-development.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="Files/web.jpg" alt="Web Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="web-development.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="Files/web.jpg" alt="Web Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="web-development.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="Files/web.jpg" alt="Web Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="web-development.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="Files/web.jpg" alt="Web Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="web-development.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="Files/web.jpg" alt="Web Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="web-development.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="Files/web.jpg" alt="Web Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <div class="view-more-container">
+                    <a href="web-development.html" class="btn secondary">See Work in Full<i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="work-category-block">
+                <h3 class="category-title">UI/UX Design</h3>
+                <div class="swiper portfolio-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="uiux.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/ui1-full.jpg" alt="UI/UX Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="uiux.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/ui2-full.jpg" alt="UI/UX Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="uiux.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/ui3-full.jpg" alt="UI/UX Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="uiux.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/ui4-full.jpg" alt="UI/UX Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="uiux.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/ui5-full.jpg" alt="UI/UX Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="uiux.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/ui6-full.jpg" alt="UI/UX Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <div class="view-more-container">
+                    <a href="uiux.html" class="btn secondary">See Full Work <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="work-category-block">
+                <h3 class="category-title">Brand Identity</h3>
+                <div class="swiper portfolio-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="branding.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/brand1-full.jpg" alt="Brand Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="branding.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/brand2-full.jpg" alt="Brand Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="branding.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/brand3-full.jpg" alt="Brand Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="branding.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/brand4-full.jpg" alt="Brand Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="branding.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/brand5-full.jpg" alt="Brand Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="branding.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/brand6-full.jpg" alt="Brand Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <div class="view-more-container">
+                    <a href="branding.html" class="btn secondary">More Brand Portfolio <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="work-category-block">
+                <h3 class="category-title">Graphic Design</h3>
+                <div class="swiper portfolio-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="graphics-design.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/graphic1-full.jpg" alt="Graphic Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="graphics-design.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/graphic2-full.jpg" alt="Graphic Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="graphics-design.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/graphic3-full.jpg" alt="Graphic Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="graphics-design.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/graphic4-full.jpg" alt="Graphic Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="graphics-design.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/graphic5-full.jpg" alt="Graphic Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="graphics-design.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/graphic6-full.jpg" alt="Graphic Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <div class="view-more-container">
+                    <a href="graphics-design.html" class="btn secondary">More Graphic Portfolio <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <div class="work-category-block">
+                <h3 class="category-title">Motion Graphics</h3>
+                <div class="swiper portfolio-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <a href="motion-graphics.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/motion1-full.jpg" alt="Motion Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="motion-graphics.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/motion2-full.jpg" alt="Motion Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="motion-graphics.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/motion3-full.jpg" alt="Motion Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="motion-graphics.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/motion4-full.jpg" alt="Motion Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="motion-graphics.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/motion5-full.jpg" alt="Motion Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="swiper-slide">
+                            <a href="motion-graphics.html" class="project-link" target="_blank">
+                                <div class="work-card-centered">
+                                    <img src="files/motion6-full.jpg" alt="Motion Project">
+                                    <div class="project-overlay">
+                                        <span>Click me</span>
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+                <div class="view-more-container">
+                    <a href="motion-graphics.html" class="btn secondary">More Motion Portfolio <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="testimonials" class="section bg-light">
+        <div class="container">
+            <h2>Client Testimonials</h2>
+            <p class="subtitle">What our clients say</p>
+            <div class="testimonials-carousel">
+                <div class="carousel-track">
+                    <div class="testimonial-card">
+                        <p>"Vector Core delivered an outstanding brand identity that perfectly captured our vision. Professional and creative."</p>
+                        <h4>— Client Name, Company</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"The best design team I've worked with. Attention to detail is unmatched."</p>
+                        <h4>— Client Name, Startup</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Transformed our online presence with stunning motion graphics and UI."</p>
+                        <h4>— Client Name, Tech Firm</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Fast, reliable, and creative. Highly recommend for any branding project."</p>
+                        <h4>— Client Name, Brand</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Their web development work took our business to the next level."</p>
+                        <h4>— Client Name, E-commerce</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"Exceptional quality and service from start to finish."</p>
+                        <h4>— Client Name, Enterprise</h4>
+                    </div>
+                    <!-- Duplicates for infinite loop -->
+                    <div class="testimonial-card">
+                        <p>"Vector Core delivered an outstanding brand identity that perfectly captured our vision. Professional and creative."</p>
+                        <h4>— Client Name, Company</h4>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"The best design team I've worked with. Attention to detail is unmatched."</p>
+                        <h4>— Client Name, Startup</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="section">
+        <div class="container">
+            <h2>Our Team</h2>
+            <p class="subtitle">Creative professionals dedicated to design excellence</p>
+            <div class="team-glitch-grid">
+                <!-- Member 1 -->
+                <div class="team-glitch-card">
+                    <div class="glitch-photo">
+                        <img src="Files/mine.jpg" alt="Member 1">
+                        <div class="terminal-overlay">
+                            <span class="typewriter">Creative Director // Vision Master</span>
+                        </div>
+                    </div>
+                    <div class="team-glitch-info">
+                        <h3>JOHNSON O. WISDOM (FOUNDER)</h3>
+                        <p class="bio">Leads creative direction and strategy.</p>
+                        <div class="agency-social-links team-social">
+                            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div class="team-glitch-card">
+                    <div class="glitch-photo">
+                        <img src="files/team2.jpg" alt="Member 2">
+                        <div class="terminal-overlay">
+                            <span class="typewriter">Lead Designer // UI/UX Expert</span>
+                        </div>
+                    </div>
+                    <div class="team-glitch-info">
+                        <h3>Member Two</h3>
+                        <p class="bio">Specializes in intuitive digital experiences.</p>
+                        <div class="agency-social-links team-social">
+                            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div class="team-glitch-card">
+                    <div class="glitch-photo">
+                        <img src="Files/mathsmania.jpg" alt="Member 3">
+                        <div class="terminal-overlay">
+                            <span class="typewriter">Web Developer // Code Architect</span>
+                        </div>
+                    </div>
+                    <div class="team-glitch-info">
+                        <h3>VICTOR LEO GOSPEL (CO-FOUNDER)</h3>
+                        <p class="bio">Builds fast, scalable websites.</p>
+                        <div class="agency-social-links team-social">
+                            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 4 -->
+                <div class="team-glitch-card">
+                    <div class="glitch-photo">
+                        <img src="files/team4.jpg" alt="Member 4">
+                        <div class="terminal-overlay">
+                            <span class="typewriter">Motion Designer // Animation Specialist</span>
+                        </div>
+                    </div>
+                    <div class="team-glitch-info">
+                        <h3>Member Four</h3>
+                        <p class="bio">Creates dynamic motion graphics.</p>
+                        <div class="agency-social-links team-social">
+                            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 5 -->
+                <div class="team-glitch-card">
+                    <div class="glitch-photo">
+                        <img src="Files/abariconcept.jpg" alt="Member 5">
+                        <div class="terminal-overlay">
+                            <span class="typewriter">Brand Strategist // Identity Builder</span>
+                        </div>
+                    </div>
+                    <div class="team-glitch-info">
+                        <h3>ROTIMI A. TEJIRI</h3>
+                        <p class="bio">Crafts powerful brand identities.</p>
+                        <div class="agency-social-links team-social">
+                            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Member 6 -->
+                <div class="team-glitch-card">
+                    <div class="glitch-photo">
+                        <img src="files/team6.jpg" alt="Member 6">
+                        <div class="terminal-overlay">
+                            <span class="typewriter">Vector Specialist // Illustration Master</span>
+                        </div>
+                    </div>
+                    <div class="team-glitch-info">
+                        <h3>Member Six</h3>
+                        <p class="bio">Expert in scalable vector art.</p>
+                        <div class="agency-social-links team-social">
+                            <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container contact-content">
+            <h2>Let's Bring Your Dream To Life</h2>
+            <p class="large">Ready to elevate your brand with world-class design and development?</p>
+            <div class="hero-buttons">
+                <a href="https://wa.link/2ze25q" target="_blank" class="btn primary"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+                <a href="mailto:your@email.com" class="btn secondary"><i class="fas fa-envelope"></i> Email Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <img src="files/logo.png" alt="Vector Core" class="footer-logo">
+            <div class="agency-social-links">
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-behance"></i></a>
+            </div>
+            <p>&copy; 2025 Vector Core. All rights reserved.</p>
+        </div>
+    </footer>
+    </main>
+
+    <div id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
