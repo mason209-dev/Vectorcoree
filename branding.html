@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="description" content="Motion Graphics portfolio by Vector Core — dynamic logo animations, explainer videos, cinematic sequences, and high-impact visual storytelling."/>
+  <meta property="og:title" content="Motion Graphics | Vector Core"/>
+  <meta property="og:description" content="Premium motion design for ambitious brands worldwide."/>
+  <meta property="og:image" content="files/thumbnail-motion.jpg"/>
+  <title>Motion Graphics | Vector Core</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+
+  <style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow-x: hidden; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0b0c10;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    @media (max-width: 768px) { .container { padding: 0 20px; } }
+
+    /* Fixed Nav */
+    .nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(11, 12, 16, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 12px 0;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      height: 40px;
+      filter: drop-shadow(0 0 12px #00f2fe);
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: #00f2fe; }
+    .back-btn {
+      color: #00f2fe;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+    .back-btn:hover { text-decoration: underline; }
+
+    /* Preloader */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #0b0c10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 1.2s ease;
+    }
+    #preloader.fade-out { opacity: 0; visibility: hidden; }
+    .preloader-logo {
+      height: 150px;
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    /* Hero Intro */
+    .hero-intro {
+      text-align: center;
+      padding: 160px 0 120px;
+    }
+    .hero-intro .hero-logo {
+      height: 180px;
+      margin-bottom: 40px;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    .hero-intro h1 {
+      font-size: 4.8rem;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+    .hero-intro p {
+      font-size: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto 60px;
+      color: #aaa;
+    }
+    .subtitle {
+      color: #00f2fe;
+      font-size: 1.4rem;
+      margin-bottom: 80px;
+    }
+
+    /* Reveal Animations */
+    .reveal-slide {
+      opacity: 0;
+      transform: translateX(100px);
+      transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-slide.left { transform: translateX(-100px); }
+    .reveal-slide.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Project Section */
+    .project {
+      margin-bottom: 160px;
+    }
+    .project h2 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .project-tags {
+      color: #00f2fe;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    .project p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin-bottom: 50px;
+      color: #ccc;
+    }
+
+    /* Video Wrapper */
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      transition: all 0.6s ease;
+      cursor: pointer;
+    }
+    .video-wrapper:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 40px 100px rgba(0, 242, 254, 0.3);
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 242, 254, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.4s ease;
+    }
+    .video-wrapper:hover .play-overlay {
+      background: rgba(0, 242, 254, 0.25);
+    }
+    .play-icon {
+      width: 90px;
+      height: 90px;
+      background: rgba(0, 242, 254, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #0b0c10;
+      transition: all 0.4s ease;
+    }
+    .video-wrapper:hover .play-icon {
+      transform: scale(1.15);
+      background: #00f2fe;
+    }
+
+    /* Modal */
+    .video-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    .video-modal.active { display: flex; }
+    .modal-content {
+      width: 100%;
+      max-width: 1200px;
+      aspect-ratio: 16/9;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      font-size: 3rem;
+      color: #00f2fe;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      padding: 120px 0 80px;
+      text-align: center;
+      border-top: 1px solid rgba(0, 242, 254, 0.1);
+    }
+    .footer-logo {
+      height: 80px;
+      margin-bottom: 40px;
+      filter: drop-shadow(0 0 20px #00f2fe);
+    }
+    .large {
+      font-size: 1.4rem;
+      margin-bottom: 40px;
+      color: #aaa;
+    }
+    .agency-social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .agency-social-links a {
+      color: #00f2fe;
+      font-size: 1.8rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(0, 242, 254, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.6s ease;
+      text-decoration: none; /* Ensures no underline */
+    }
+    .agency-social-links a:hover {
+      transform: rotate(360deg) scale(1.3);
+      background: rgba(0, 242, 254, 0.3);
+    }
+
+    /* Particles */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #00f2fe;
+      border-radius: 50%;
+      opacity: 0;
+      box-shadow: 0 0 12px #00f2fe;
+      animation: fall linear infinite;
+    }
+
+    /* Animations */
+    @keyframes pulseGlow {
+      0%, 100% { filter: drop-shadow(0 0 30px #00f2fe); }
+      50% { filter: drop-shadow(0 0 80px #00f2fe); }
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(calc(100vh + 100px)); opacity: 0; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-intro h1 { font-size: 3.5rem; }
+      .project h2 { font-size: 2.6rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body class="loading-active">
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <img src="files/logo.png" alt="Vector Core" class="preloader-logo">
+  </div>
+
+  <!-- Particles Background -->
+  <div id="particles"></div>
+
+  <!-- Fixed Nav -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <a href="index.html"><img src="files/logo.png" alt="Vector Core" class="logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#work">Portfolio</a></li>
+        <li><a href="index.html#team">Team</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <a href="index.html" class="back-btn">← Back to Main</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Hero Intro -->
+    <section class="hero-intro">
+      <img src="files/logo.png" alt="Vector Core" class="hero-logo">
+      <h1>Motion Graphics Showcase</h1>
+      <p class="subtitle">Where motion meets meaning</p>
+      <p>Dynamic storytelling through precision animation — logo reveals, explainer videos, cinematic sequences, and kinetic typography for ambitious brands worldwide.</p>
+    </section>
+
+    <!-- Project 1 -->
+    <section class="project reveal-slide">
+      <h2>Brand Identity Motion Package</h2>
+      <div class="project-tags">Logo Animation • After Effects • Kinetic Typography</div>
+      <p>Premium logo animation suite with seamless transitions, particle systems, and fluid typography reveals.</p>
+      <div class="video-wrapper" data-video="YOUR_YOUTUBE_EMBED_ID_1">
+        <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_EMBED_ID_1" allowfullscreen loading="lazy"></iframe>
+        <div class="play-overlay"><div class="play-icon">▶</div></div>
+      </div>
+    </section>
+
+    <!-- Project 2 -->
+    <section class="project reveal-slide left">
+      <h2>Product Explainer Animation</h2>
+      <div class="project-tags">3D Product • Cinema 4D • Storytelling</div>
+      <p>Smooth camera choreography, clean text overlays, and highlight effects to showcase complex products.</p>
+      <div class="video-wrapper" data-video="YOUR_YOUTUBE_EMBED_ID_2">
+        <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_EMBED_ID_2" allowfullscreen loading="lazy"></iframe>
+        <div class="play-overlay"><div class="play-icon">▶</div></div>
+      </div>
+    </section>
+
+    <!-- Project 3 -->
+    <section class="project reveal-slide">
+      <h2>Cinematic Title Sequence</h2>
+      <div class="project-tags">Film Titles • Particles • Dramatic Lighting</div>
+      <p>Epic title sequence with glowing text, lens flares, and atmospheric depth for film and trailer intros.</p>
+      <div class="video-wrapper" data-video="YOUR_YOUTUBE_EMBED_ID_3">
+        <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_EMBED_ID_3" allowfullscreen loading="lazy"></iframe>
+        <div class="play-overlay"><div class="play-icon">▶</div></div>
+      </div>
+    </section>
+
+    <!-- Project 4 -->
+    <section class="project reveal-slide left">
+      <h2>App Promo Animation</h2>
+      <div class="project-tags">UI Motion • Screen Replacement • Energetic Pace</div>
+      <p>Fast-paced app promotion with smooth device transitions, vibrant colors, and call-to-action highlights.</p>
+      <div class="video-wrapper" data-video="YOUR_YOUTUBE_EMBED_ID_4">
+        <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_EMBED_ID_4" allowfullscreen loading="lazy"></iframe>
+        <div class="play-overlay"><div class="play-icon">▶</div></div>
+      </div>
+    </section>
+
+    <!-- Project 5 -->
+    <section class="project reveal-slide">
+      <h2>Abstract Motion Loop</h2>
+      <div class="project-tags">Generative Art • Looping • VJ Style</div>
+      <p>Seamless abstract motion background with evolving shapes, color shifts, and hypnotic flow — perfect for events and visuals.</p>
+      <div class="video-wrapper" data-video="YOUR_YOUTUBE_EMBED_ID_5">
+        <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_EMBED_ID_5" allowfullscreen loading="lazy"></iframe>
+        <div class="play-overlay"><div class="play-icon">▶</div></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <img src="files/logo.png" alt="Vector Core" class="footer-logo">
+      <p class="large">Premium Vector Graphics & Branding Agency</p>
+      <div class="agency-social-links">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
+        <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+      </div>
+      <p>&copy; <span id="year"></span> Vector Core. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="video-modal">
+    <div class="modal-content">
+      <span class="modal-close">×</span>
+      <iframe id="modalVideo" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Preloader
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    setTimeout(() => preloader.classList.add('fade-out'), 800);
+    document.body.classList.remove('loading-active');
+  });
+
+  // Particles
+  const particlesContainer = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (Math.random() * 15 + 15) + 's';
+    p.style.animationDelay = Math.random() * 10 + 's';
+    particlesContainer.appendChild(p);
+  }
+
+  // Reveal on Scroll — REPEATS every time you scroll past
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible'); // Remove class to allow re-trigger
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: '-50px', // Optional: triggers a bit earlier
+    }
+  );
+
+  // Observe all reveal elements
+  document.querySelectorAll('.reveal-slide').forEach((el) => {
+    observer.observe(el);
+  });
+
+  // Video Modal
+  document.querySelectorAll('.video-wrapper').forEach((wrapper) => {
+    wrapper.addEventListener('click', () => {
+      const iframeSrc = wrapper.querySelector('iframe').src;
+      const modal = document.getElementById('videoModal');
+      const modalVideo = document.getElementById('modalVideo');
+      modalVideo.src = iframeSrc + '?autoplay=1';
+      modal.classList.add('active');
+    });
+  });
+
+  document.querySelector('.modal-close').addEventListener('click', closeModal);
+  document.getElementById('videoModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeModal();
+  });
+
+  function closeModal() {
+    const modal = document.getElementById('videoModal');
+    const modalVideo = document.getElementById('modalVideo');
+    modal.classList.remove('active');
+    modalVideo.src = '';
+  }
+</script>
+</body>
+</html>
