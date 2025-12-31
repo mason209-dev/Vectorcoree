@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Motion Graphics Portfolio | Vector Core</title>
+  
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Global fixes (same as other pages) */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; overflow-x: hidden; background: #0a0a0a; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+    @media (max-width: 768px) { .container { padding: 0 1rem; } }
+
+    /* Side-slide reveal animation (alternating left/right) */
+    .reveal-slide {
+      opacity: 0;
+      transform: translateX(100px);
+      transition: opacity 1s ease-out, transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal-slide.left { transform: translateX(-100px); }
+
+    .reveal-slide.is-visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Stagger children */
+    .reveal-slide > * {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: all 0.9s ease-out;
+      transition-delay: calc(var(--i) * 150ms);
+    }
+
+    .reveal-slide.left > * { transform: translateX(-60px); }
+
+    .reveal-slide.is-visible > * {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Video embed styling - YouTube-like padded player */
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      background: #000;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      transition: all 0.6s ease;
+      cursor: pointer;
+    }
+
+    .video-wrapper:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 40px rgba(0, 212, 255, 0.25);
+    }
+
+    .video-wrapper iframe,
+    .video-wrapper video {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+    }
+
+    /* Play overlay */
+    .play-overlay {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px; height: 80px;
+      background: rgba(0, 212, 255, 0.7);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.4s ease;
+      opacity: 0.9;
+    }
+
+    .video-wrapper:hover .play-overlay {
+      background: rgba(0, 212, 255, 1);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .play-overlay::before {
+      content: '';
+      width: 0; height: 0;
+      border-left: 20px solid white;
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+      margin-left: 6px;
+    }
+
+    /* Full-screen modal */
+    .video-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .video-modal.active { display: flex; }
+
+    .modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      aspect-ratio: 16/9;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-[#0a0a0a] text-gray-100 font-sans">
+
+  <!-- Back button -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-gray-800/40">
+    <div class="container py-5 flex justify-start items-center">
+      <a href="index.html" class="back-link">
+        <span class="arrow">←</span> Back to Main Portfolio
+      </a>
+    </div>
+  </header>
+
+  <main class="container pt-32 pb-40">
+
+    <!-- Intro -->
+    <section class="text-center mb-32 reveal-slide">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6">Motion Graphics Showcase</h1>
+      <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+        Fluid animations, storytelling through motion, and high-impact visuals.
+      </p>
+    </section>
+
+    <!-- Project 1 (right slide) -->
+    <section class="reveal-slide mb-40" style="--i:0">
+      <h2 class="text-4xl font-bold mb-6">Brand Identity Motion Package</h2>
+      <p class="text-lg text-gray-300 mb-10 leading-relaxed">
+        Dynamic logo animation suite with seamless transitions, particle effects, and kinetic typography.
+        Created for premium brand elevation.
+      </p>
+
+      <div class="video-wrapper" data-video-url="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1">
+        <div class="play-overlay"></div>
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Project 2 (left slide) -->
+    <section class="reveal-slide left mb-40" style="--i:1">
+      <h2 class="text-4xl font-bold mb-6">Product Explainer Animation</h2>
+      <p class="text-lg text-gray-300 mb-10 leading-relaxed">
+        3D product walkthrough with smooth camera moves, text overlays, and highlight effects.
+      </p>
+
+      <div class="video-wrapper" data-video-url="https://www.youtube.com/embed/VIDEO_ID_2?autoplay=1&mute=1">
+        <div class="play-overlay"></div>
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Project 3 (right slide) -->
+    <section class="reveal-slide mb-40" style="--i:2">
+      <h2 class="text-4xl font-bold mb-6">Social Media Loop Pack</h2>
+      <p class="text-lg text-gray-300 mb-10 leading-relaxed">
+        Infinite loop animations optimized for Instagram Reels and TikTok, with vibrant transitions and text reveals.
+      </p>
+
+      <div class="video-wrapper" data-video-url="https://www.youtube.com/embed/VIDEO_ID_3?autoplay=1&mute=1">
+        <div class="play-overlay"></div>
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_3?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Project 4 (left slide) -->
+    <section class="reveal-slide left mb-40" style="--i:3">
+      <h2 class="text-4xl font-bold mb-6">UI Motion Components</h2>
+      <p class="text-lg text-gray-300 mb-10 leading-relaxed">
+        Micro-interactions and animated UI elements for modern web and app interfaces.
+      </p>
+
+      <div class="video-wrapper" data-video-url="https://www.youtube.com/embed/VIDEO_ID_4?autoplay=1&mute=1">
+        <div class="play-overlay"></div>
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_4?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Project 5 (right slide) -->
+    <section class="reveal-slide mb-40" style="--i:4">
+      <h2 class="text-4xl font-bold mb-6">Cinematic Title Sequence</h2>
+      <p class="text-lg text-gray-300 mb-10 leading-relaxed">
+        Film-style opening titles with dramatic typography, particle bursts, and cinematic camera moves.
+      </p>
+
+      <div class="video-wrapper" data-video-url="https://www.youtube.com/embed/VIDEO_ID_5?autoplay=1&mute=1">
+        <div class="play-overlay"></div>
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_5?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Project 6 (left slide) -->
+    <section class="reveal-slide left mb-40" style="--i:5">
+      <h2 class="text-4xl font-bold mb-6">Event Promo Animation</h2>
+      <p class="text-lg text-gray-300 mb-10 leading-relaxed">
+        High-energy promotional video for events with bold transitions, glitch effects, and rhythmic timing.
+      </p>
+
+      <div class="video-wrapper" data-video-url="https://www.youtube.com/embed/VIDEO_ID_6?autoplay=1&mute=1">
+        <div class="play-overlay"></div>
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID_6?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black border-t border-gray-800/50 py-12 text-center">
+    <div class="container max-w-4xl mx-auto">
+      <h3 class="text-3xl font-bold text-[#00d4ff] mb-4">Vector Core</h3>
+      <p class="text-gray-400 mb-8 max-w-xl mx-auto">
+        Crafting high-performance web experiences with clean code and thoughtful design.
+      </p>
+
+      <div class="mb-8">
+        <h4 class="text-lg font-semibold text-gray-200 mb-4">Quick Links</h4>
+        <ul class="flex flex-wrap justify-center gap-6 text-gray-400">
+          <li><a href="index.html" class="hover:text-[#00d4ff] transition">Home</a></li>
+          <li><a href="#" class="hover:text-[#00d4ff] transition">About</a></li>
+          <li><a href="#" class="hover:text-[#00d4ff] transition">Services</a></li>
+          <li><a href="#" class="hover:text-[#00d4ff] transition">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="mb-12">
+        <div class="flex justify-center gap-6">
+          <a href="#" class="text-gray-400 hover:text-[#00d4ff] text-2xl transition">LinkedIn</a>
+          <a href="#" class="text-gray-400 hover:text-[#00d4ff] text-2xl transition">Behance</a>
+          <a href="#" class="text-gray-400 hover:text-[#00d4ff] text-2xl transition">Dribbble</a>
+        </div>
+      </div>
+
+      <p class="text-gray-500 text-sm">
+        © <span id="year"></span> Vector Core. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Video modal -->
+  <div id="videoModal" class="video-modal">
+    <div class="modal-content">
+      <span class="modal-close">×</span>
+      <iframe id="modalVideo" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Side-slide reveal observer
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.reveal-slide');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          entry.target.classList.toggle('is-visible', entry.isIntersecting);
+        });
+      }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+
+      slides.forEach(slide => observer.observe(slide));
+    });
+
+    // Video click → full-screen modal
+    document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+      wrapper.addEventListener('click', () => {
+        const videoUrl = wrapper.getAttribute('data-video-url');
+        const modal = document.getElementById('videoModal');
+        const modalVideo = document.getElementById('modalVideo');
+
+        modalVideo.src = videoUrl.replace('mute=1', ''); // remove mute for modal
+        modal.classList.add('active');
+      });
+    });
+
+    // Close modal
+    document.querySelector('.modal-close').addEventListener('click', () => {
+      const modal = document.getElementById('videoModal');
+      const modalVideo = document.getElementById('modalVideo');
+      modal.classList.remove('active');
+      modalVideo.src = ''; // stop video
+    });
+
+    // Close on outside click
+    document.getElementById('videoModal').addEventListener('click', (e) => {
+      if (e.target === e.currentTarget) {
+        document.querySelector('.modal-close').click();
+      }
+    });
+  </script>
+
+</body>
+</html>

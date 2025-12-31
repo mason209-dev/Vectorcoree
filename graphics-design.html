@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="description" content="Graphics design portfolio by Vector Core — dynamic logo animations, explainer videos, cinematic sequences, and high-impact visual storytelling."/>
+  <meta property="og:title" content="Graphics Design | Vector Core"/>
+  <meta property="og:description" content="Premium graphic design for ambitious brands worldwide."/>
+  <meta property="og:image" content="files/thumbnail-graphics.jpg"/>
+  <title>Graphics Design | Vector Core</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+
+  <style>
+    /* Reset & Base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow-x: hidden; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0b0c10;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    @media (max-width: 768px) { .container { padding: 0 20px; } }
+
+    /* Fixed Nav */
+    .nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(11, 12, 16, 0.95);
+      backdrop-filter: blur(12px);
+      padding: 12px 0;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      height: 40px;
+      filter: drop-shadow(0 0 12px #00f2fe);
+    }
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: #00f2fe; }
+    .back-btn {
+      color: #00f2fe;
+      font-size: 1.1rem;
+      text-decoration: none;
+    }
+    .back-btn:hover { text-decoration: underline; }
+
+    /* Preloader */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #0b0c10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 1.2s ease;
+    }
+    #preloader.fade-out { opacity: 0; visibility: hidden; }
+    .preloader-logo {
+      height: 150px;
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    /* Hero Intro */
+    .hero-intro {
+      text-align: center;
+      padding: 160px 0 120px;
+    }
+    .hero-intro .hero-logo {
+      height: 180px;
+      margin-bottom: 40px;
+      animation: breathe 4s ease-in-out infinite;
+    }
+    .hero-intro h1 {
+      font-size: 4.8rem;
+      font-weight: 800;
+      margin-bottom: 30px;
+    }
+    .hero-intro p {
+      font-size: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto 60px;
+      color: #aaa;
+    }
+    .subtitle {
+      color: #00f2fe;
+      font-size: 1.4rem;
+      margin-bottom: 80px;
+    }
+
+    /* Reveal Animations */
+    .reveal-slide {
+      opacity: 0;
+      transform: translateX(100px);
+      transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-slide.left { transform: translateX(-100px); }
+    .reveal-slide.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Project Section */
+    .project {
+      margin-bottom: 160px;
+    }
+    .project h2 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .project-tags {
+      color: #00f2fe;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+    .project p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin-bottom: 50px;
+      color: #ccc;
+    }
+
+    /* Video Wrapper */
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 242, 254, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      transition: all 0.6s ease;
+      cursor: pointer;
+    }
+    .video-wrapper:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 40px 100px rgba(0, 242, 254, 0.3);
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+    .play-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 242, 254, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.4s ease;
+    }
+    .video-wrapper:hover .play-overlay {
+      background: rgba(0, 242, 254, 0.25);
+    }
+    .play-icon {
+      width: 90px;
+      height: 90px;
+      background: rgba(0, 242, 254, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      color: #0b0c10;
+      transition: all 0.4s ease;
+    }
+    .video-wrapper:hover .play-icon {
+      transform: scale(1.15);
+      background: #00f2fe;
+    }
+
+    /* Modal */
+    .video-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    .video-modal.active { display: flex; }
+    .modal-content {
+      width: 100%;
+      max-width: 1200px;
+      aspect-ratio: 16/9;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: -50px;
+      right: 0;
+      font-size: 3rem;
+      color: #00f2fe;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer {
+      padding: 120px 0 80px;
+      text-align: center;
+      border-top: 1px solid rgba(0, 242, 254, 0.1);
+    }
+    .footer-logo {
+      height: 80px;
+      margin-bottom: 40px;
+      filter: drop-shadow(0 0 20px #00f2fe);
+    }
+    .large {
+      font-size: 1.4rem;
+      margin-bottom: 40px;
+      color: #aaa;
+    }
+    .agency-social-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .agency-social-links a {
+      color: #00f2fe;
+      font-size: 1.8rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(0, 242, 254, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.6s ease;
+      text-decoration: none; /* Ensures no underline */
+    }
+    .agency-social-links a:hover {
+      transform: rotate(360deg) scale(1.3);
+      background: rgba(0, 242, 254, 0.3);
+    }
+
+    /* Particles */
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #00f2fe;
+      border-radius: 50%;
+      opacity: 0;
+      box-shadow: 0 0 12px #00f2fe;
+      animation: fall linear infinite;
+    }
+
+    /* Animations */
+    @keyframes pulseGlow {
+      0%, 100% { filter: drop-shadow(0 0 30px #00f2fe); }
+      50% { filter: drop-shadow(0 0 80px #00f2fe); }
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(calc(100vh + 100px)); opacity: 0; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-intro h1 { font-size: 3.5rem; }
+      .project h2 { font-size: 2.6rem; }
+      .nav-links { display: none; }
+    }
+
+    /* Subtle fade-up reveal animation (repeatable on scroll up/down) */
+    .reveal-section {
+      opacity: 0;
+      transform: translateY(100px);
+      transition: opacity 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                  transform 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger inner elements */
+    .reveal-section > * {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.9s ease-out;
+      transition-delay: calc(var(--i) * 150ms);
+    }
+
+    .reveal-section.is-visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Project card hover enhancement */
+    .project-card {
+      transition: all 0.6s ease;
+      border-color: rgba(0, 242, 254, 0.15);
+    }
+
+    .project-card:hover {
+      border-color: #00f2fe;
+      box-shadow: 0 0 35px rgba(0, 242, 254, 0.2);
+      transform: translateY(-8px);
+    }
+
+    /* FIX: Per-project image fit - each card gets its own aspect ratio to match real design size */
+    .project-card {
+      overflow: hidden;
+      background: #111; /* subtle fallback */
+      border-radius: 12px;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* shows full design without cropping/stretching */
+      object-position: center top; /* prioritizes top/head */
+      background: #111;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.02);
+    }
+
+    /* Custom aspect ratios per project type - change these numbers if needed */
+    .aspect-social { aspect-ratio: 1 / 1; } /* 1:1 - square for Instagram posts/stories (1080x1080px) */
+    .aspect-brochure { aspect-ratio: 2 / 3; } /* 2:3 - portrait/tall for tri-fold brochures */
+    .aspect-business-card { aspect-ratio: 3.5 / 2; } /* 3.5:2 - standard business card landscape (3.5x2 inches) */
+    .aspect-logo { aspect-ratio: 1 / 1; } /* 1:1 - square for logo previews */
+    .aspect-flyer { aspect-ratio: 2 / 3; } /* 2:3 - portrait for event flyers */
+    .aspect-packaging { aspect-ratio: 4 / 3; } /* 4:3 - landscape for product labels/packaging */
+    .aspect-infographic { aspect-ratio: 9 / 16; } /* 9:16 - tall for vertical infographics */
+    .aspect-book-cover { aspect-ratio: 2 / 3; } /* 2:3 - portrait for book covers */
+    .aspect-banner { aspect-ratio: 16 / 9; } /* 16:9 - wide for banners/ads */
+    .aspect-stationery { aspect-ratio: 4 / 3; } /* 4:3 - landscape for stationery mockups */
+    .aspect-ticket { aspect-ratio: 2 / 1; } /* 2:1 - wide for tickets */
+    .aspect-menu { aspect-ratio: 3 / 4; } /* 3:4 - portrait for menus */
+    .aspect-certificate { aspect-ratio: 4 / 3; } /* 4:3 - landscape for certificates */
+    .aspect-invitation { aspect-ratio: 1 / 1; } /* 1:1 - square for invitations */
+    .aspect-tshirt { aspect-ratio: 1 / 1; } /* 1:1 - square for t-shirt graphics */
+    .aspect-billboard { aspect-ratio: 16 / 9; } /* 16:9 - very wide for billboards */
+    .aspect-merch { aspect-ratio: 1 / 1; } /* 1:1 - square for merch mockups */
+    .aspect-report { aspect-ratio: 4 / 3; } /* 4:3 - landscape for reports */
+    .aspect-calendar { aspect-ratio: 4 / 3; } /* 4:3 - landscape for calendars */
+    .aspect-signage { aspect-ratio: 16 / 9; } /* 16:9 - wide for signage/wayfinding */
+  </style>
+</head>
+<body class="loading-active">
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <img src="files/logo.png" alt="Vector Core" class="preloader-logo">
+  </div>
+
+  <!-- Particles Background -->
+  <div id="particles"></div>
+
+  <!-- Fixed Nav -->
+  <nav class="nav">
+    <div class="container nav-container">
+      <a href="index.html"><img src="files/logo.png" alt="Vector Core" class="logo"></a>
+      <ul class="nav-links">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#work">Portfolio</a></li>
+        <li><a href="index.html#team">Team</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <a href="index.html" class="back-btn">← Back to Main</a>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Hero Intro -->
+    <section class="hero-intro">
+      <img src="files/logo.png" alt="Vector Core" class="hero-logo">
+      <h1>Graphics Design Showcase</h1>
+      <p class="subtitle">Where design meets impact</p>
+      <p>Dynamic storytelling through precision design — branding, print, packaging, digital assets, and visual systems for ambitious brands worldwide.</p>
+    </section>
+
+    <!-- Project 1 -->
+    <section class="project reveal-section mb-40" style="--i:0">
+      <h2>Social Media Template</h2>
+      <div class="project-tags">Social Assets • Branding • Digital</div>
+      <p>Versatile Instagram post and story templates with cohesive branding, custom illustrations, and engaging layouts.</p>
+      <div class="project-card aspect-social bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="Files/template.png" alt="Social Media Template Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 2 -->
+    <section class="project reveal-section left mb-40" style="--i:1">
+      <h2>Brochure Design</h2>
+      <div class="project-tags">Print • Typography • Layout</div>
+      <p>Tri-fold brochure with elegant typography, high-quality imagery, and clear information hierarchy.</p>
+      <div class="project-card aspect-brochure bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="Files/mathsmania.jpg" alt="Brochure Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 3 -->
+    <section class="project reveal-section mb-40" style="--i:2">
+      <h2>Business Card Set</h2>
+      <div class="project-tags">Stationery • Premium Print • Foil</div>
+      <p>Minimalist double-sided business cards with premium foil, spot UV, and custom die-cut options.</p>
+      <div class="project-card aspect-business-card bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="Files/card.jpg" alt="Business Card Set" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 4 -->
+    <section class="project reveal-section left mb-40" style="--i:3">
+      <h2>Logo Design</h2>
+      <div class="project-tags">Identity • Vector • Scalable</div>
+      <p>Modern, versatile logo suite with primary, secondary, and monochrome versions for brand flexibility.</p>
+      <div class="project-card aspect-logo bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-logo-design.jpg" alt="Logo Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 5 -->
+    <section class="project reveal-section mb-40" style="--i:4">
+      <h2>Flyer Design</h2>
+      <div class="project-tags">Event • Promotional • Bold</div>
+      <p>High-energy event flyer with bold typography, vibrant colors, and clear call-to-action.</p>
+      <div class="project-card aspect-flyer bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="Files/flyer.png" alt="Flyer Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 6 -->
+    <section class="project reveal-section left mb-40" style="--i:5">
+      <h2>Packaging Label</h2>
+      <div class="project-tags">Product • Label • Branding</div>
+      <p>Premium product label design with elegant typography, iconography, and brand consistency.</p>
+      <div class="project-card aspect-packaging bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-packaging-label.jpg" alt="Packaging Label Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 7 -->
+    <section class="project reveal-section mb-40" style="--i:6">
+      <h2>Infographic Design</h2>
+      <div class="project-tags">Data Viz • Icons • Hierarchy</div>
+      <p>Data-driven infographic with clean visualization, icon sets, and readable hierarchy.</p>
+      <div class="project-card aspect-infographic bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="Files/infographics.jpg" alt="Infographic Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 8 -->
+    <section class="project reveal-section left mb-40" style="--i:7">
+      <h2>Book Cover Design</h2>
+      <div class="project-tags">Cover • Illustration • Typography</div>
+      <p>Striking book cover with atmospheric illustration, bold title treatment, and spine/back design.</p>
+      <div class="project-card aspect-book-cover bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-book-cover.jpg" alt="Book Cover Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 9 -->
+    <section class="project reveal-section mb-40" style="--i:8">
+      <h2>Banner Ad Set</h2>
+      <div class="project-tags">Digital • Ads • Responsive</div>
+      <p>Responsive digital banner ads for web and social with consistent branding and strong CTA.</p>
+      <div class="project-card aspect-banner bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-banner-ad.jpg" alt="Banner Ad Set" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 10 -->
+    <section class="project reveal-section left mb-40" style="--i:9">
+      <h2>Stationery Package</h2>
+      <div class="project-tags">Suite • Letterhead • Envelope</div>
+      <p>Full stationery suite including letterhead, envelope, and notepad with elegant details.</p>
+      <div class="project-card aspect-stationery bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-stationery.jpg" alt="Stationery Package" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 11 -->
+    <section class="project reveal-section mb-40" style="--i:10">
+      <h2>Event Ticket Design</h2>
+      <div class="project-tags">Ticket • Security • Thematic</div>
+      <p>Premium event tickets with security features, QR code, and thematic illustration.</p>
+      <div class="project-card aspect-ticket bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-event-ticket.jpg" alt="Event Ticket Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 12 -->
+    <section class="project reveal-section left mb-40" style="--i:11">
+      <h2>Menu Design</h2>
+      <div class="project-tags">Restaurant • Photography • Layout</div>
+      <p>Restaurant menu layout with appetizing photography, clear hierarchy, and elegant typography.</p>
+      <div class="project-card aspect-menu bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-menu-design.jpg" alt="Menu Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 13 -->
+    <section class="project reveal-section mb-40" style="--i:12">
+      <h2>Certificate Design</h2>
+      <div class="project-tags">Formal • Ornate • Seal</div>
+      <p>Formal certificate template with ornate borders, gold foil effect simulation, and custom seal.</p>
+      <div class="project-card aspect-certificate bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-certificate.jpg" alt="Certificate Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 14 -->
+    <section class="project reveal-section left mb-40" style="--i:13">
+      <h2>Invitation Card</h2>
+      <div class="project-tags">Event • Illustration • Foil</div>
+      <p>Elegant wedding or event invitation with custom illustration, foil stamping effect, and RSVP details.</p>
+      <div class="project-card aspect-invitation bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-invitation-card.jpg" alt="Invitation Card Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 15 -->
+    <section class="project reveal-section mb-40" style="--i:14">
+      <h2>T-shirt Graphic</h2>
+      <div class="project-tags">Apparel • Illustration • Print</div>
+      <p>Bold streetwear graphic design with illustration, typography, and print-ready files.</p>
+      <div class="project-card aspect-tshirt bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-tshirt.jpg" alt="T-shirt Graphic Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 16 -->
+    <section class="project reveal-section left mb-40" style="--i:15">
+      <h2>Billboard Design</h2>
+      <div class="project-tags">Outdoor • Large Scale • Impact</div>
+      <p>Large-scale billboard creative with high-contrast visuals, minimal text, and strong brand impact.</p>
+      <div class="project-card aspect-billboard bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-billboard.jpg" alt="Billboard Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 17 -->
+    <section class="project reveal-section mb-40" style="--i:16">
+      <h2>Merchandise Mockup Pack</h2>
+      <div class="project-tags">Mockup • PSD • Product</div>
+      <p>Realistic mockups for apparel, accessories, and print products with layered PSD files.</p>
+      <div class="project-card aspect-merch bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-merch-mockup.jpg" alt="Merchandise Mockup Pack" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 18 -->
+    <section class="project reveal-section left mb-40" style="--i:17">
+      <h2>Annual Report Layout</h2>
+      <div class="project-tags">Corporate • Data • Branding</div>
+      <p>Professional annual report design with data visualization, infographics, and corporate branding.</p>
+      <div class="project-card aspect-report bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-annual-report.jpg" alt="Annual Report Layout" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 19 -->
+    <section class="project reveal-section mb-40" style="--i:18">
+      <h2>Calendar Design</h2>
+      <div class="project-tags">Annual • Thematic • Grid</div>
+      <p>Artistic monthly calendar with thematic illustrations, clean grid, and premium print quality.</p>
+      <div class="project-card aspect-calendar bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-calendar.jpg" alt="Calendar Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Project 20 -->
+    <section class="project reveal-section left mb-40" style="--i:19">
+      <h2>Signage & Wayfinding</h2>
+      <div class="project-tags">Environmental • Hierarchy • Consistency</div>
+      <p>Environmental graphics for indoor/outdoor signage with clear hierarchy and brand consistency.</p>
+      <div class="project-card aspect-signage bg-gray-900/50 rounded-2xl overflow-hidden border border-gray-800 shadow-2xl">
+        <img src="images/graphics-signage.jpg" alt="Signage & Wayfinding Design" class="w-full h-auto object-cover" loading="lazy">
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <img src="files/logo.png" alt="Vector Core" class="footer-logo">
+      <p class="large">Premium Vector Graphics & Branding Agency</p>
+      <div class="agency-social-links">
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
+        <a href="#" aria-label="Tiktok"><i class="fab fa-tiktok"></i></a>
+      </div>
+      <p>&copy; <span id="year"></span> Vector Core. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Preloader
+  window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    setTimeout(() => preloader.classList.add('fade-out'), 800);
+    document.body.classList.remove('loading-active');
+  });
+
+  // Particles
+  const particlesContainer = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.classList.add('particle');
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (Math.random() * 15 + 15) + 's';
+    p.style.animationDelay = Math.random() * 10 + 's';
+    particlesContainer.appendChild(p);
+  }
+
+  // Reveal on Scroll — REPEATS every time you scroll past
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible'); // Remove class to allow re-trigger
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+      rootMargin: '-50px', // Optional: triggers a bit earlier
+    }
+  );
+
+  // Observe all reveal elements
+  document.querySelectorAll('.reveal-section').forEach((el) => {
+    observer.observe(el);
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.reveal-section');
+
+    const observer2 = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: "0px 0px -10% 0px"
+    });
+
+    sections.forEach(section => observer2.observe(section));
+  });
+  </script>
+</body>
+</html>
