@@ -1,1 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect | Vector Core</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0b0c10;
+            --accent: #00f2fe;
+            --text-light: #e0e0e0;
+            --text-gray: #aaaaaa;
+            --card-bg: #11121a;
+            --transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+
+        body.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Navbar ── */
+        nav {
+            position: fixed;
+            top: -100px;
+            width: 100%;
+            padding: 1.2rem 5%;
+            background: rgba(11, 12, 16, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: top 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body.loaded nav {
+            top: 0;
+        }
+
+        .logo img {
+            height: 45px;
+            filter: drop-shadow(0 0 10px var(--accent));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            width: 35px;
+            height: 24px;
+            position: relative;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: all 0.4s ease;
+            position: absolute;
+            left: 0;
+        }
+
+        .hamburger span:nth-child(1) { top: 0; }
+        .hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+        .hamburger span:nth-child(3) { bottom: 0; }
+
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg); top: 10px; }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg); bottom: 10px; }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            height: 100vh;
+            background: rgba(11, 12, 16, 0.98);
+            backdrop-filter: blur(12px);
+            z-index: 999;
+            padding: 80px 40px 40px;
+            transition: left 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 3rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 2.5rem;
+            cursor: pointer;
+        }
+
+        .sidebar-links {
+            list-style: none;
+        }
+
+        .sidebar-links li {
+            margin-bottom: 2.2rem;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+
+        .sidebar.active .sidebar-links li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .sidebar-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.7rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .sidebar-links a:hover {
+            color: var(--accent);
+            padding-left: 15px;
+            text-shadow: 0 0 10px var(--accent);
+        }
+
+        /* ── Contact Section ── */
+        .contact-section {
+            padding: 180px 5% 120px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-section h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .contact-section p.subtitle {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition-delay: 0.3s;
+        }
+
+        body.loaded .contact-section h1,
+        body.loaded .contact-section p.subtitle {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        /* Clickable Card Wrapper */
+        .contact-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body.loaded .contact-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        body.loaded .contact-link:nth-child(1) { transition-delay: 0.4s; }
+        body.loaded .contact-link:nth-child(2) { transition-delay: 0.55s; }
+        body.loaded .contact-link:nth-child(3) { transition-delay: 0.7s; }
+
+        .contact-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem;
+            border: 1px solid rgba(0, 242, 254, 0.12);
+            transition: all 0.7s ease;
+            text-align: center;
+            height: 100%;
+        }
+
+        .contact-link:hover .contact-card {
+            transform: translateY(-12px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 242, 254, 0.18);
+        }
+
+        .contact-card i {
+            font-size: 3.2rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .contact-link:hover i {
+            transform: rotate(360deg);
+        }
+
+        .contact-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .contact-card p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        /* Form Animation */
+        .contact-form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition-delay: 0.9s;
+        }
+
+        body.loaded .contact-form-container {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 242, 254, 0.12);
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1.2rem;
+            background: #0f1015;
+            border: 1px solid #222;
+            color: var(--text-light);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.15);
+        }
+
+        .send-btn {
+            width: 100%;
+            padding: 1.3rem;
+            background: var(--accent);
+            color: #0b0c10;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+        }
+
+        .send-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 242, 254, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            padding: 120px 5% 80px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 242, 254, 0.1);
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s ease-out;
+            transition-delay: 1.2s;
+        }
+
+        body.loaded footer {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .footer-logo img {
+            height: 80px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 15px var(--accent));
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0 1.5rem;
+        }
+
+        .social-icons a {
+            color: var(--accent);
+            font-size: 1.8rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 242, 254, 0.1);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: var(--accent);
+            color: #0b0c10;
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.5);
+        }
+
+        .copyright {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { display: none; }
+            .contact-section h1 { font-size: 3rem; }
+            .contact-form { padding: 2rem; }
+        }
+
+        @media (min-width: 769px) {
+            .hamburger { display: none; }
+            .nav-links { display: flex !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button class="close-btn" id="closeBtn">×</button>
+        </div>
+        <ul class="sidebar-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="contact.html">Connect</a></li>
+        </ul>
+    </div>
+
+    <nav>
+        <div class="logo">
+            <img src="files/logo.png" alt="Vector Core">
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="contact.html">Connect</a></li>
+        </ul>
+
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <section class="contact-section">
+        <h1>Let's Connect</h1>
+        <p class="subtitle">Ready to elevate your brand with precision vector design, identity systems, or digital experiences? We're here to build something extraordinary together.</p>
+
+        <div class="contact-grid">
+            <a href="mailto:vectorcoree@gmail.com" class="contact-link">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email Us</h3>
+                    <p>vectorcoree@gmail.com</p>
+                </div>
+            </a>
+
+            <a href="tel:+2349042579504" class="contact-link">
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Call Us</h3>
+                    <p>+234 904 257 9504</p>
+                </div>
+            </a>
+
+            <a href="https://www.google.com/maps/search/?api=1&query=Lagos,Nigeria" target="_blank" class="contact-link">
+                <div class="contact-card">
+                    <i class="fas fa-location-dot"></i>
+                    <h3>Visit Us</h3>
+                    <p>Lagos, Nigeria</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="contact-form-container">
+            <div class="contact-form">
+                <form id="vcContactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Tell us about your project..." required></textarea>
+                    </div>
+                    <button type="submit" class="send-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">
+            <img src="files/logo.png" alt="Vector Core">
+        </div>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/vectorcoree?igsh=MTYwaHFyaDZhcWNvZQ==" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/vectorcoree" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/vectorcoree" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://www.behance.net/wisdomjohnson11" target="_blank"><i class="fab fa-behance"></i></a>
+        </div>
+        <p class="copyright">© 2026 Vector Core. All rights reserved.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const closeBtn = document.getElementById('closeBtn');
+
+        const toggleMenu = () => {
+            sidebar.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        };
+
+        hamburger.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !hamburger.contains(e.target) && sidebar.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        const form = document.getElementById('vcContactForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('.send-btn');
+            btn.innerHTML = 'Sending...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.style.background = '#28a745';
+                btn.innerHTML = 'Message Sent! 🔥';
+                form.reset();
+                setTimeout(() => {
+                    btn.style.background = '';
+                    btn.innerHTML = 'Send Message';
+                    btn.disabled = false;
+                }, 3000);
+            }, 1800);
+        });
+    </script>
+</body>
+</html>
