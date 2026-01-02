@@ -408,7 +408,7 @@ h2 {
 .services-carousel .carousel-track {
     display: flex;
     gap: 30px;
-    animation: scrollLeft 25s linear infinite;
+    animation: scrollLeft 200linear infinite;
     width: max-content;
     padding: 40px 0;
 }
@@ -418,8 +418,8 @@ h2 {
 }
 
 .service-card {
-    width: 400px;
-    height: 400px;
+    width: 200px;
+    height: 200px;
     background: #11121a;
     border-radius: 20px;
     display: flex;
@@ -679,6 +679,9 @@ h2 {
     color: #00f2fe;
     margin-bottom: 10px;
 }
+.position{
+    padding-top: -250px;
+}
 
 /* Contact */
 .contact-content .hero-buttons {
@@ -911,7 +914,7 @@ footer {
   margin-bottom: 60px;
 }
 .sidebar-logo {
-  height: 70px;
+  height: 50px;
 }
 .close-btn {
   background: none;
@@ -957,7 +960,7 @@ footer {
 /* Faster Carousels */
 .services-carousel .carousel-track,
 .testimonials-carousel .carousel-track {
-  animation: scrollLeft 5s linear infinite !important;
+  animation: scrollLeft 25s linear infinite !important;
   animation-play-state: running !important;
 }
 
@@ -1020,4 +1023,66 @@ footer {
 
 .project-link:active .work-card-centered {
   transform: scale(0.98);
+}
+/* WhatsApp Sticky Button - Dynamic Expansion */
+.whatsapp-sticky {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    height: 60px;
+    width: 60px; /* Starting state: Circle */
+    background-color: #25d366;
+    color: #fff;
+    border-radius: 50px; /* Pill shape capability */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Keeps icon on the left */
+    padding: 0 18px; /* Centers the icon initially */
+    font-size: 28px;
+    text-decoration: none;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* The text inside the button */
+.wa-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 12px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s ease;
+}
+
+/* Hover State: Expands to show text */
+@media (min-width: 1025px) {
+    .whatsapp-sticky:hover {
+        width: 200px; /* Expands to fit text */
+        background-color: #128c7e;
+        box-shadow: 0 0 25px rgba(37, 211, 102, 0.5);
+    }
+
+    .whatsapp-sticky:hover .wa-text {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Mobile/System State: Icon only */
+@media (max-width: 1024px) {
+    .whatsapp-sticky {
+        width: 55px;
+        height: 55px;
+        padding: 0;
+        justify-content: center;
+        bottom: 20px;
+        left: 20px;
+    }
+    .wa-text {
+        display: none; /* Force text off on mobile/touch systems */
+    }
 }
